@@ -17,6 +17,7 @@ from bless.config.bless_config import USERNAME_VALIDATION_OPTION, REMOTE_USERNAM
 
 # man 8 useradd
 USERNAME_PATTERN = re.compile('[a-z_][a-z0-9_-]*[$]?\Z')
+USERNAME_EXTEND_PATTERN = re.compile('[a-z_][\.a-z0-9_-]*[$]?\Z')
 
 # debian
 # On Debian, the only constraints are that usernames must neither start
@@ -70,7 +71,7 @@ def validate_user(user, username_validation, username_blacklist=None):
 
 
 def _validate_user_useradd(user):
-    if USERNAME_PATTERN.match(user) is None:
+    if USERNAME_EXTEND_PATTERN.match(user) is None:
         raise ValidationError('Username contains invalid characters.')
 
 
